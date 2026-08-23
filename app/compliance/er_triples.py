@@ -29,7 +29,9 @@ def trich_triples(text: str) -> tuple[list[Triple], list[str]]:
     low = text.lower()
     ra: list[Triple] = []
     canh_bao: list[str] = []
-    for raw in data.get("triples") or []:
+    # Mảng trần thay vì {"triples": [...]} — cùng quirk model như judge (đo 21/08).
+    ds = data if isinstance(data, list) else data.get("triples") or []
+    for raw in ds:
         try:
             t = Triple.model_validate(raw)
         except Exception:  # noqa: BLE001 — JSON LLM tuỳ tiện, bỏ phần tử hỏng là đủ

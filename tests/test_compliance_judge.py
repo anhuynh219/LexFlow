@@ -46,6 +46,14 @@ def _vote(verdict):
                             "can_cu": "x", "quote_hop_dong": "", "quote_luat": ""}]}
 
 
+def test_vote_mang_tran_khong_vo(monkeypatch):
+    # Model thỉnh thoảng trả [...] thay vì {"phan_quyet": [...]} — vỡ thật 21/08
+    # (lặp lại được trên plan lớn), _index_by_cu phải đỡ.
+    mang = _vote("tuan_thu")["phan_quyet"]
+    monkeypatch.setattr(judge_mod, "chat_json", lambda *a, **k: mang)
+    assert phan_dinh("text", _plan_mot_cu(), _pg_rong())[0].verdict == "tuan_thu"
+
+
 def test_dong_thuan_hai_phieu(monkeypatch):
     calls = []
     monkeypatch.setattr(judge_mod, "chat_json",

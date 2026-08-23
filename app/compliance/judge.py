@@ -40,8 +40,12 @@ _SYSTEM = (
     "điều khoản không định nghĩa/không dùng thuật ngữ theo cách có thể so.\n"
     "BẮT BUỘC trả verdict cho TẤT CẢ id trong danh sách (CU lẫn định nghĩa), "
     "không bỏ sót id nào — không kết luận được thì trả thieu_thong_tin cho id đó.\n"
-    'Chỉ trả JSON: {"phan_quyet": [{"cu_id": "...", "verdict": "...", '
-    '"can_cu": "...", "quote_hop_dong": "...", "quote_luat": "..."}]}'
+    # can_cu TRƯỚC verdict: nhãn phát ra SAU lập luận. Chữa lớp lỗi đảo-nhãn đo
+    # 19-21/08 (can_cu nói "phù hợp" mà verdict vi_pham); các bản viết-lại tiêu
+    # chí ttt/kad đều làm ca phủ-định Đ25k5 tái đảo nhãn — chỉ giữ reorder này.
+    "Viết can_cu (lập luận) TRƯỚC, rồi mới chốt verdict KHỚP với can_cu đó. "
+    'Chỉ trả JSON: {"phan_quyet": [{"cu_id": "...", "can_cu": "...", '
+    '"verdict": "...", "quote_hop_dong": "...", "quote_luat": "..."}]}'
 )
 _SYSTEM_OVERRIDE = (
     "Bạn là chuyên gia pháp chế ngân hàng. Một điều khoản hợp đồng đang bị coi là "
@@ -98,9 +102,12 @@ def _prompt(text_dieu_hd: str, plan: CUPlan) -> str:
     return ra
 
 
-def _index_by_cu(vote: dict) -> dict[str, dict]:
+def _index_by_cu(vote: dict | list) -> dict[str, dict]:
+    # Model thỉnh thoảng trả mảng trần thay vì {"phan_quyet": [...]} (đo 21/08,
+    # lặp lại được trên plan lớn) — coi mảng trần là danh sách phán quyết.
+    ds = vote if isinstance(vote, list) else vote.get("phan_quyet", [])
     return {
-        pq["cu_id"]: pq for pq in vote.get("phan_quyet", [])
+        pq["cu_id"]: pq for pq in ds
         if isinstance(pq, dict) and pq.get("cu_id")
     }
 

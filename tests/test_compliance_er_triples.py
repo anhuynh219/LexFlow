@@ -23,6 +23,15 @@ def test_bo_triple_entity_rong(monkeypatch):
     assert triples == [] and len(canh_bao) == 2
 
 
+def test_mang_tran_van_doc_duoc(monkeypatch):
+    # Model thỉnh thoảng trả [...] thay vì {"triples": [...]} (đo 21/08).
+    monkeypatch.setattr(er_triples, "chat_json", lambda *a, **k: [
+        {"chu_the": "Bên B", "hanh_vi": "thanh toán", "doi_tuong": "phí dịch vụ"},
+    ])
+    triples, canh_bao = er_triples.trich_triples("Bên B thanh toán phí dịch vụ.")
+    assert [t.chu_the for t in triples] == ["Bên B"] and canh_bao == []
+
+
 def test_json_hong_tra_rong(monkeypatch):
     monkeypatch.setattr(er_triples, "chat_json", lambda *a, **k: {"sai": 1})
     triples, canh_bao = er_triples.trich_triples("Bên A cung cấp dịch vụ.")
