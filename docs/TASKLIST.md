@@ -425,9 +425,22 @@ hơn, tức ghi công cũ thuộc diện may mắn ở ranh giới.
   recall đếm một bên ranh giới nên nhảy 1/3↔0/3. Recall 20/08: ThuHo 1/1 · PAYFAC 0/3
   (#13 lệch phiên bản như cũ, #194 kad như cũ, #35 mới). Chờ chủ repo phân xử #35
   như đã phân xử #194.
-- **Bước tiếp theo:** (tuỳ chọn, khi rảnh máy) chạy giàn synthetic full-pipeline N lần
-  xác nhận hết lật — blip mạng hiếm nên lượt xác nhận chủ yếu đo may rủi; cơ chế đã
-  kiểm chứng trực tiếp bằng diff hybrid vs vector-only.
+- ~~Chạy giàn synthetic full-pipeline N lần xác nhận hết lật~~ — **ĐÃ XÁC NHẬN 23/08**
+  (nhân tiện đo prompt H): 14 case × 2–4 lượt trên 2 plan dựng ĐỘC LẬP → 0/14 lật,
+  kể cả NĐ52-Đ26k2::vi_pham từng lật lịch sử (4×vi_pham).
+- **Đo 23/08 — prompt H (commit `2445d04`) đổi cán cân ranh giới ttt↔kad:** đảo thứ
+  tự field JSON của judge (can_cu TRƯỚC verdict — nhãn phát ra SAU lập luận) chữa lớp
+  **đảo-nhãn** (can_cu "phù hợp" mà verdict vi_pham); mọi bản viết-lại tiêu chí
+  ttt/kad (ví dụ cặp đôi, dòng tự-kiểm) đều làm ca phủ-định Đ25k5 tái đảo nhãn —
+  ablation cùng-plan 4 biến thể chỉ mặt chính sự hiện diện cặp ví dụ ttt/kad là mảnh
+  độc. Pilot giữ 10/14 nhưng hồ sơ trượt đổi: ca biên nghiêng ĐỀU về thieu_thong_tin
+  thay vì trộn kad/ttt. **Hợp đồng thật: ThuHo 1/1 · PAYFAC 3/3** — #35/#194 phục hồi
+  qua toàn-văn (TT18-Đ9, TT40-Đ8 kad→ttt), #13 ghi công gián tiếp (ttt định nghĩa
+  NĐ52-Đ3 tại Điều 1, khớp mức số hiệu). Trade-off: tổng ttt tăng (ThuHo 366 ttt/200
+  kad; PAYFAC 257/314) — recall lên, nhiễu cảnh báo tăng, **chưa có thước precision**.
+- **Bước tiếp theo:** phân xử gold #35 giờ chỉ còn là chất lượng nhãn (metric không
+  treo vào nó); việc mở là thước precision/nhiễu cho lớp thieu_thong_tin — đếm bao
+  nhiêu ttt trong báo cáo là cảnh báo hữu ích vs nhiễu, cần người duyệt mẫu.
 
 ### [ ] T30 · Dữ liệu synthetic từ CU luật — pilot 15 case đạt 7/15, lộ 3 lớp lỗi
 
@@ -476,8 +489,15 @@ nhãn-vi-phạm = đảo nhãn, không phải đọc sai phủ định). Phải 
 hết. Chấm lại 3 case Đ25k5: cả 3 đúng, case `vi_pham` thật không hỏng. **Điểm: 10/14.**
 Lưu ý: đổi `_SYSTEM` đổi khoá cache — cache 2 báo cáo hợp đồng thật vốn đã vô hiệu.
 
-- **Bước tiếp theo:** đo tần suất lật bằng giàn synthetic (T29), rồi mới mở rộng bộ
-  sinh (CU `chi_duoc`/`cho_phep`, case toàn-văn cho lớp thieu_thong_tin).
+Chấm lại 23/08 với prompt H (can_cu trước verdict, xem T29): **10/14 · 0 lật** — thành
+phần trượt đổi: Đ13k3::ttt nay ĐÚNG, Đ25k5::ttt trượt sang ttt (nhãn duyệt kad); 3 ca
+biên ttt↔kad không bao giờ cùng đúng ở mọi biến thể prompt đã đo — dừng ở mức prompt,
+chọn hồ sơ nghiêng-ttt. NĐ52-Đ26k2::tuan_thu (lỗi hệ thống xác nhận) kháng mọi biến
+thể kể cả câu nghĩa-vụ-khái-quát nhắm thẳng nó — còn mở.
+
+- **Bước tiếp theo:** mở rộng bộ sinh (CU `chi_duoc`/`cho_phep`, case toàn-văn cho lớp
+  thieu_thong_tin — lỗ đo duy nhất còn lại, gate miss Đ13k4::ttt tự hết ý nghĩa khi có
+  case đúng tầng).
 
 ---
 

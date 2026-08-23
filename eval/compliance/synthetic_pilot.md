@@ -109,6 +109,18 @@ ví dụ cặp đôi cụ thể (cấm trả lãi ví: "không được trả l�
 0,5%/năm"→vi_pham) → cả 3 case Đ25k5 đúng, case `vi_pham` thật không regress.
 **Điểm sau fix: 10/14.** Đổi `_SYSTEM` cũng đổi khoá cache (vốn đã vô hiệu từ 18/08).
 
+### 2b · Vòng 23/08: prompt H — lập luận trước nhãn, điểm giữ 10/14 nhưng đổi hồ sơ trượt
+
+Thử kéo 2 ca biên ttt↔kad bằng ví dụ cặp đôi ttt/kad → ca phủ-định Đ25k5::tuan_thu
+**tái đảo nhãn** (can_cu "phù hợp" mà verdict vi_pham); đối chứng cùng-plan: prompt cũ
+2/2 đúng, prompt mới 2/2 sai; ablation 4 biến thể → chính sự hiện diện cặp ví dụ
+ttt/kad là mảnh độc, không phải cách diễn đạt. Cách ăn duy nhất: **đảo thứ tự field
+JSON — can_cu TRƯỚC verdict** (prompt H, commit `2445d04`). Xác nhận 14 case × 2–4
+lượt, 2 plan độc lập: 10/14 · 0 lật; Đ13k3::ttt nay đúng, Đ25k5::ttt trượt sang ttt,
+3 ca biên không bao giờ cùng đúng ở mọi biến thể — dừng ở mức prompt, chọn nghiêng-ttt
+(thuận recall + "cấm suy diễn từ im lặng"). Hợp đồng thật: ThuHo 1/1 · PAYFAC 3/3
+(#35/#194 phục hồi qua toàn-văn, #13 gián tiếp qua định nghĩa NĐ52-Đ3).
+
 ### 3 · Biên thieu_thong_tin ↔ khong_ap_dung (2 ca) — đúng lớp T29
 
 Đ25k5::thieu_thong_tin và NĐ52-Đ26k2::tuan_thu đều bị đẩy sang `khong_ap_dung`. Ca

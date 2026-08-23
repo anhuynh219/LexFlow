@@ -6,6 +6,36 @@
 
 ---
 
+## 2026-08-23 (CN) — prompt judge H: lập luận trước nhãn — ThuHo 1/1 · PAYFAC 3/3
+
+- **Done (vòng cải thiện ranh giới ttt↔kad, đo từng bước trên giàn synthetic).**
+  Hai bản viết-lại tiêu chí ttt/kad (ví dụ cặp đôi, dòng tự-kiểm) đều làm ca
+  phủ-định Đ25k5::tuan_thu **tái đảo nhãn** (can_cu viết "phù hợp" mà verdict
+  vi_pham) — đối chứng cùng-plan prompt cũ 2/2 đúng, prompt mới 2/2 sai; ablation
+  4 biến thể chỉ mặt: chính sự hiện diện của cặp ví dụ ttt/kad là mảnh độc, không
+  phải cách diễn đạt. Cách chữa ăn được duy nhất là **đổi cơ chế: đảo thứ tự field
+  JSON — can_cu (lập luận) TRƯỚC verdict** (prompt H, commit `2445d04`). Xác nhận
+  14 case × 2–4 lượt trên 2 plan dựng độc lập: **10/14 · 0/14 lật** (kể cả
+  NĐ52::vi_pham từng lật lịch sử, giờ 4×vi_pham); ca biên giờ nghiêng ĐỀU về
+  thieu_thong_tin (cờ-cho-người) thay vì trộn kad/ttt tùy ca.
+- **Chấm lại 2 hợp đồng thật (cache vô hiệu vì `_SYSTEM` đổi): ThuHo 1/1 ·
+  PAYFAC 3/3** (20/08: 1/1 · 0/3). #35 + #194 phục hồi qua lượt toàn-văn (TT18-Đ9,
+  TT40-Đ8: kad→ttt); #13 ghi công gián tiếp — ttt trên định nghĩa NĐ52-Đ3 tại đúng
+  Điều 1 hợp đồng, khớp mức số hiệu văn bản (không đích xác k18 luật sư dẫn).
+  Trade-off ghi nhận: tổng thieu_thong_tin tăng (ThuHo 366 ttt / 200 kad, PAYFAC
+  257/314 — đếm nhãn trong báo cáo 23/08) — recall lên nhưng nhiễu cảnh báo tăng,
+  chưa có thước precision.
+- **Vá robustness:** model thỉnh thoảng trả JSON mảng trần thay vì object bọc —
+  vỡ `phan_dinh` trên plan lớn (tái hiện được) và từng vỡ `trich_triples`; cả hai
+  chỗ giờ đỡ mảng trần, kèm 2 test (884 xanh).
+- **Ship:** commit `2445d04` (judge reorder + bare-array guard + tests).
+- **Decision:** dừng cải thiện ranh giới ttt↔kad ở mức prompt — 3 ca biên không
+  bao giờ cùng đúng ở mọi biến thể đã đo (ranh giới mờ với cả người); chọn hồ sơ
+  trượt nghiêng-ttt vì thuận metric recall và triết lý "cấm suy diễn từ im lặng".
+- **Next:** mở rộng bộ synthetic (CU chi_duoc/cho_phep + case toàn-văn cho lớp
+  thieu_thong_tin); chủ repo phân xử gold #35 (giờ chỉ còn là chất lượng nhãn,
+  metric không treo vào nó nữa).
+
 ## 2026-08-20 (T4) — chấm lại 2 báo cáo hợp đồng thật (gate v3 + từ vựng + prompt mới)
 
 - **Done (chấm lại từ đầu cả 2 hợp đồng, cache cũ vô hiệu toàn bộ).** Job nền nhiều
