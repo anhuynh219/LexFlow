@@ -495,9 +495,16 @@ biên ttt↔kad không bao giờ cùng đúng ở mọi biến thể prompt đã
 chọn hồ sơ nghiêng-ttt. NĐ52-Đ26k2::tuan_thu (lỗi hệ thống xác nhận) kháng mọi biến
 thể kể cả câu nghĩa-vụ-khái-quát nhắm thẳng nó — còn mở.
 
-- **Bước tiếp theo:** mở rộng bộ sinh (CU `chi_duoc`/`cho_phep`, case toàn-văn cho lớp
-  thieu_thong_tin — lỗ đo duy nhất còn lại, gate miss Đ13k4::ttt tự hết ý nghĩa khi có
-  case đúng tầng).
+- ~~Mở rộng bộ sinh~~ — **ĐÃ SINH 23/08, chờ duyệt**: 14 case mới trong
+  `eval/compliance/synthetic_mo_rong.jsonl` (+`.html` để duyệt) — 4 CU
+  `chi_duoc`/`cho_phep` (TT18-Đ13k2, TT40-Đ25k2/Đ27k3, TT15-Đ20k2) × 3 biến thể +
+  2 case **toàn-văn** cho lớp im-lặng (hợp đồng nhiều điều thiếu nội dung bắt buộc
+  TT40-Đ8 / TT18-Đ9 — lỗ đo duy nhất còn lại). Đã kiểm máy: 4 case vi_pham trái luật
+  thật (không né kiểu chế tài như pilot), ttt không lọt số ngưỡng, toàn-văn không lọt
+  nội dung bắt buộc. File local (gitignore), whitelist + commit SAU khi duyệt.
+- **Bước tiếp theo:** chủ repo duyệt 14 case (giữ/sửa/loại); đạt thì viết giàn chấm
+  (case toàn-văn cần `lap_plan_toan_van`, giàn hiện tại chỉ chấm mức điều) rồi mới
+  tính điểm.
 
 ---
 
