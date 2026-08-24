@@ -423,8 +423,11 @@ hơn, tức ghi công cũ thuộc diện may mắn ở ranh giới.
   judge đổi 19/08 (cache giữ 3 thế hệ: 2 lượt cũ đều ttt). Không phải flip cùng-code,
   nhưng cùng bài học: ca biên ttt↔kad dịch chuyển theo MỌI thay đổi prompt, metric
   recall đếm một bên ranh giới nên nhảy 1/3↔0/3. Recall 20/08: ThuHo 1/1 · PAYFAC 0/3
-  (#13 lệch phiên bản như cũ, #194 kad như cũ, #35 mới). Chờ chủ repo phân xử #35
-  như đã phân xử #194.
+  (#13 lệch phiên bản như cũ, #194 kad như cũ, #35 mới). ~~Chờ chủ repo phân xử #35~~
+  — **Đã phân xử 24/08 (chủ repo): `thieu_thong_tin`.** TT18-Đ9 lượt toàn-văn trên
+  PAYFAC: hợp đồng có dính nghiệp vụ thẻ (POS, ĐVCNT) nên thiếu nội dung Đ9 thì cờ
+  cho người xem — không phải khong_ap_dung. Ghi công #35 dưới prompt H là hợp lệ,
+  PAYFAC 3/3 là số thật.
 - ~~Chạy giàn synthetic full-pipeline N lần xác nhận hết lật~~ — **ĐÃ XÁC NHẬN 23/08**
   (nhân tiện đo prompt H): 14 case × 2–4 lượt trên 2 plan dựng ĐỘC LẬP → 0/14 lật,
   kể cả NĐ52-Đ26k2::vi_pham từng lật lịch sử (4×vi_pham).
@@ -438,8 +441,8 @@ hơn, tức ghi công cũ thuộc diện may mắn ở ranh giới.
   qua toàn-văn (TT18-Đ9, TT40-Đ8 kad→ttt), #13 ghi công gián tiếp (ttt định nghĩa
   NĐ52-Đ3 tại Điều 1, khớp mức số hiệu). Trade-off: tổng ttt tăng (ThuHo 366 ttt/200
   kad; PAYFAC 257/314) — recall lên, nhiễu cảnh báo tăng, **chưa có thước precision**.
-- **Bước tiếp theo:** phân xử gold #35 giờ chỉ còn là chất lượng nhãn (metric không
-  treo vào nó); việc mở là thước precision/nhiễu cho lớp thieu_thong_tin — đếm bao
+- ~~Phân xử gold #35~~ — **xong 24/08** (xem trên, `thieu_thong_tin`).
+- **Bước tiếp theo:** thước precision/nhiễu cho lớp thieu_thong_tin — đếm bao
   nhiêu ttt trong báo cáo là cảnh báo hữu ích vs nhiễu, cần người duyệt mẫu.
 
 ### [ ] T30 · Dữ liệu synthetic từ CU luật — pilot 15 case đạt 7/15, lộ 3 lớp lỗi

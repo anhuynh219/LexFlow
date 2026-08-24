@@ -24,8 +24,11 @@
   và `synthetic_mo_rong.kq.jsonl`; cập nhật T30 + `synthetic_pilot.md`.
 - **Decision:** sửa danh-mục-đóng để thành vòng prompt riêng (mọi đổi `_SYSTEM`
   phải đi lại trọn kỷ luật đo T29), không vá nóng trong đợt này.
-- **Next:** vòng prompt danh-mục-đóng; chủ repo phân xử gold #35 (chỉ còn chất
-  lượng nhãn); đo precision/nhiễu lớp ttt trên báo cáo hợp đồng thật (T29).
+- **Gold #35 đã phân xử (chủ repo, 24/08): `thieu_thong_tin`** — TT18-Đ9 toàn-văn
+  trên PAYFAC là cờ hợp lệ (hợp đồng dính nghiệp vụ thẻ), ghi công đứng vững,
+  PAYFAC 3/3 là số thật. Hết mục chờ phân xử.
+- **Next:** vòng prompt danh-mục-đóng; đo precision/nhiễu lớp ttt trên báo cáo
+  hợp đồng thật (T29).
 
 ## 2026-08-23 (CN) — prompt judge H: lập luận trước nhãn — ThuHo 1/1 · PAYFAC 3/3
 
