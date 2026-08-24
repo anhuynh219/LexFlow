@@ -6,6 +6,27 @@
 
 ---
 
+## 2026-08-24 (T2) — duyệt bộ mở rộng 9/14 · chấm 7/9, 0 lật — lộ lớp lỗi danh-mục-đóng
+
+- **Done.** Chủ repo duyệt 14 case mở rộng qua trang HTML tương tác (làm lại từ bản
+  tĩnh vì không bấm được): **9 giữ / 5 loại** (3 ttt mức điều + 2 toàn-văn). Nguyên
+  tắc duyệt chốt sau phản biện: KHÔNG bỏ cả lớp `thieu_thong_tin` (lớp verdict lớn
+  nhất ở hợp đồng thật, mọi lỗi biên T29 nằm đó) — chỉ nhận case ttt khi cái thiếu
+  tự hiển nhiên từ văn bản (giữ chủ ý Đ13k2::ttt), loại ca sinh kiểu "né Y" và
+  toàn-văn thiếu-cả-cụm. Hết case toàn-văn ⇒ chưa cần viết `lap_plan_toan_van`.
+- **Chấm 9 case đã duyệt (prompt H, N=2/case): 7/9 đúng · 0/9 lật, gate hit 9/9.**
+  Tổng synthetic sau duyệt: **17/23** (pilot 10/14 + mở rộng 7/9). 2 miss ổn định
+  2/2: (1) Đ25k2::vi_pham → khong_ap_dung — **lớp lỗi mới danh-mục-đóng**: judge
+  thấy hành vi ngoài danh mục được phép và kết luận "CU không đề cập → không áp
+  dụng" (can_cu ghi rõ mạch này), đúng ra ngoài-danh-mục là vi phạm với CU
+  `chi_duoc`/`cho_phep`; (2) Đ20k2::tuan_thu → ttt — hồ sơ nghiêng-ttt đã biết.
+- **Ship:** whitelist + commit `synthetic_mo_rong.jsonl` (nhãn + quyết định duyệt)
+  và `synthetic_mo_rong.kq.jsonl`; cập nhật T30 + `synthetic_pilot.md`.
+- **Decision:** sửa danh-mục-đóng để thành vòng prompt riêng (mọi đổi `_SYSTEM`
+  phải đi lại trọn kỷ luật đo T29), không vá nóng trong đợt này.
+- **Next:** vòng prompt danh-mục-đóng; chủ repo phân xử gold #35 (chỉ còn chất
+  lượng nhãn); đo precision/nhiễu lớp ttt trên báo cáo hợp đồng thật (T29).
+
 ## 2026-08-23 (CN) — prompt judge H: lập luận trước nhãn — ThuHo 1/1 · PAYFAC 3/3
 
 - **Done (vòng cải thiện ranh giới ttt↔kad, đo từng bước trên giàn synthetic).**

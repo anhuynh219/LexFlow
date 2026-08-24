@@ -53,9 +53,15 @@ docs/SCHEMA_KG.md
 docs/compliance/
 eval/compliance/*.jsonl
 eval/compliance/*.md
+eval/compliance/*.cache.json
 # ... trừ bộ synthetic sinh từ luật công khai, đã người duyệt (T30)
 !eval/compliance/synthetic_pilot.jsonl
 !eval/compliance/synthetic_pilot.kq.jsonl
 !eval/compliance/synthetic_pilot.md
 !eval/compliance/t29_lat.jsonl
+!eval/compliance/synthetic_mo_rong.jsonl
+!eval/compliance/synthetic_mo_rong.kq.jsonl
 eval/compliance/synthetic_pilot.html
+eval/compliance/synthetic_mo_rong.html
+# Bản xuất từ trang duyệt HTML — quyết định đã gộp vào synthetic_mo_rong.jsonl (trường duyet)
+data/synthetic_mo_rong.ketqua.json

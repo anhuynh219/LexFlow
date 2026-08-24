@@ -495,16 +495,28 @@ biên ttt↔kad không bao giờ cùng đúng ở mọi biến thể prompt đã
 chọn hồ sơ nghiêng-ttt. NĐ52-Đ26k2::tuan_thu (lỗi hệ thống xác nhận) kháng mọi biến
 thể kể cả câu nghĩa-vụ-khái-quát nhắm thẳng nó — còn mở.
 
-- ~~Mở rộng bộ sinh~~ — **ĐÃ SINH 23/08, chờ duyệt**: 14 case mới trong
-  `eval/compliance/synthetic_mo_rong.jsonl` (+`.html` để duyệt) — 4 CU
-  `chi_duoc`/`cho_phep` (TT18-Đ13k2, TT40-Đ25k2/Đ27k3, TT15-Đ20k2) × 3 biến thể +
-  2 case **toàn-văn** cho lớp im-lặng (hợp đồng nhiều điều thiếu nội dung bắt buộc
-  TT40-Đ8 / TT18-Đ9 — lỗ đo duy nhất còn lại). Đã kiểm máy: 4 case vi_pham trái luật
-  thật (không né kiểu chế tài như pilot), ttt không lọt số ngưỡng, toàn-văn không lọt
-  nội dung bắt buộc. File local (gitignore), whitelist + commit SAU khi duyệt.
-- **Bước tiếp theo:** chủ repo duyệt 14 case (giữ/sửa/loại); đạt thì viết giàn chấm
-  (case toàn-văn cần `lap_plan_toan_van`, giàn hiện tại chỉ chấm mức điều) rồi mới
-  tính điểm.
+- ~~Mở rộng bộ sinh~~ — **SINH 23/08 · DUYỆT 24/08**: 14 case (4 CU
+  `chi_duoc`/`cho_phep` TT18-Đ13k2, TT40-Đ25k2/Đ27k3, TT15-Đ20k2 × 3 biến thể +
+  2 toàn-văn) → chủ repo giữ **9 / loại 5** (3 ttt mức điều + 2 toàn-văn). Nguyên tắc
+  duyệt rút ra: chỉ nhận case ttt khi cái thiếu tự hiển nhiên từ văn bản (giữ chủ ý
+  Đ13k2::ttt — không nêu bất kỳ con số hạn mức; loại ca sinh kiểu "viết về X nhưng né
+  Y" và toàn-văn thiếu-cả-cụm vì không giống hợp đồng thật). Hết case toàn-văn ⇒ chưa
+  cần `lap_plan_toan_van`. Bộ case + kq đã whitelist, quyết định duyệt trong trường
+  `duyet` của `synthetic_mo_rong.jsonl`.
+- **Chấm 24/08 (prompt H, N=2/case): 7/9 · 0 lật**, gate hit 9/9
+  (`synthetic_mo_rong.kq.jsonl`; chi tiết `synthetic_pilot.md`). Tổng synthetic sau
+  duyệt: **17/23** (pilot 10/14 + mở rộng 7/9). 2 miss đều ổn định 2/2:
+  1. Đ25k2::vi_pham → `khong_ap_dung` — **lớp lỗi mới: danh-mục-đóng**. Judge thấy
+     hành vi hợp đồng ngoài danh mục được phép rồi kết luận "CU không đề cập → không
+     áp dụng", trong khi với CU `chi_duoc`/`cho_phep` ngoài-danh-mục chính là vi phạm.
+     Pilot không lộ vì chỉ có cấm/trần/nghĩa-vụ.
+  2. Đ20k2::tuan_thu → ttt — hồ sơ nghiêng-ttt đã biết của prompt H (hợp đồng phủ
+     phần Giấy phép, CU gộp thêm nghĩa vụ đối soát/xác thực chưa phủ).
+- **Bước tiếp theo:** vòng prompt riêng cho lỗi danh-mục-đóng — thêm quy tắc vào
+  `_SYSTEM` ("CU liệt kê danh mục được phép: hành vi NGOÀI danh mục là vi_pham, không
+  phải khong_ap_dung"), đi lại trọn kỷ luật đo T29: baseline → chấm 23 case + soi ca
+  biên → không regress (đặc biệt ca phủ-định Đ25k5::tuan_thu) → chấm lại 2 hợp đồng
+  thật.
 
 ---
 

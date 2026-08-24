@@ -136,3 +136,31 @@ chung chung, không nói về thay đổi Giấy phép — judge chê ngoài ph�
    phải flip ngẫu nhiên không trước khi sửa prompt.
 4. Nếu duyệt đạt: mở rộng dần (thêm CU `chi_duoc`, `cho_phep`; case toàn-văn cho lớp
    thieu_thong_tin) — dữ liệu sinh từ luật công khai nên commit được.
+
+## Mở rộng 24/08: 4 CU chi_duoc/cho_phep — duyệt 9/14, chấm 7/9 · 0 lật
+
+Sinh 23/08 (14 case: 4 CU tình thái × 3 biến thể + 2 toàn-văn), chủ repo duyệt 24/08
+qua trang HTML tương tác: **9 giữ / 5 loại** (3 `thieu_thong_tin` mức điều + 2 toàn-văn).
+Nguyên tắc duyệt rút ra: chỉ nhận case ttt khi cái thiếu **tự hiển nhiên từ văn bản** —
+giữ chủ ý Đ13k2::ttt (điều khoản rút ngoại tệ không nêu BẤT KỲ con số hạn mức nào, kiểm
+được khách quan); loại các ca sinh kiểu "viết về X nhưng né Y" (người đọc không tự thấy
+thiếu) và 2 case toàn-văn (thiếu-cả-cụm nội dung bắt buộc không giống hợp đồng thật).
+Quyết định gộp vào `synthetic_mo_rong.jsonl` (trường `duyet`). Hết case toàn-văn ⇒ đợt
+này chưa cần `lap_plan_toan_van`.
+
+Chấm bằng pipeline thật, prompt H, N=2/case (`synthetic_mo_rong.kq.jsonl`): **7/9 đúng ·
+0/9 lật**, gate hit 9/9. Hai ca trượt đều ổn định 2/2 cùng nhãn:
+
+1. **Đ25k2::vi_pham → `khong_ap_dung` — lớp lỗi mới: danh-mục-đóng.** Can_cu ghi rõ
+   mạch sai: CU liệt kê các việc được dùng ví; hành vi hợp đồng (mua ngoại tệ, chuyển
+   ra tài khoản ngoại tệ nước ngoài) không nằm trong danh mục ⇒ judge kết luận "CU
+   không đề cập → không áp dụng". Với CU `chi_duoc`/`cho_phep`, ngoài-danh-mục chính
+   là vi phạm — judge chưa có khái niệm danh mục đóng. Bộ pilot không lộ lỗi này vì
+   chỉ có cấm/trần/nghĩa-vụ.
+2. **Đ20k2::tuan_thu → ttt** — đúng hồ sơ nghiêng-ttt đã biết của prompt H: hợp đồng
+   phủ đủ phần Giấy phép (judge quote chính điều đó) nhưng CU gộp thêm nghĩa vụ đối
+   soát/xác thực mà case không phủ ⇒ đòi đủ mới chịu.
+
+**Tổng synthetic sau duyệt: 17/23** (pilot 10/14 + mở rộng 7/9). Bước tiếp: quy tắc
+danh-mục-đóng cho `_SYSTEM` — tách vòng riêng vì mọi đổi prompt phải đi lại trọn kỷ
+luật đo T29 (ghi ở `docs/TASKLIST.md`).
